@@ -829,28 +829,25 @@ myRoute = myRoute.replace('L','0').replace('R','1')
 
 nextNodes = [x for x in cleanNodes if x[0][2] == 'A']
 
+print(nextNodes)
 
-for j in range(1000):
-    for i, a in enumerate(myRoute):
-        newNextNodes = []
-        for k, b in enumerate(nextNodes):
-            #print(i, a, k, b)
-            nextNode = b[1][int(a)]
-            nextNode = [x for x in cleanNodes if x[0]==nextNode][0]
-            newNextNodes += [nextNode]
-        nextNodes = newNextNodes
-        #print(j, i, newNextNodes, len([c[0] for c in newNextNodes if c[0][2] == 'Z']), len(newNextNodes))
-        if len([c[0] for c in newNextNodes if c[0][2] == 'Z']) > 0:
-            print(j, i, newNextNodes, len([c[0] for c in newNextNodes if c[0][2] == 'Z']), len(newNextNodes))
-            print(f'Steps = {(j+1)*len(myRoute)+i+1}')
-        if len([c[0] for c in newNextNodes if c[0][2] == 'Z']) == len(newNextNodes):
-            print(f'Steps = {(j+1)*len(myRoute)+i+1}')
-            break
-            #print(len([c[0] for c in newNextNodes if c[0][2] == 'S']))
-        #print(newNextNodes)
-    else:
-        continue
-    break
+# totalSteps = 0
+# for j in range(1000):
+#     for i, a in enumerate(myRoute):
+#         totalSteps += 1
+#         newNextNodes = []
+#         for k, b in enumerate(nextNodes):
+#             #print(i, a, k, b)
+#             nextNode = b[1][int(a)]
+#             nextNode = [x for x in cleanNodes if x[0]==nextNode][0]
+#             newNextNodes += [nextNode]
+#         nextNodes = newNextNodes
+#         #print(j, i, newNextNodes, len([c[0] for c in newNextNodes if c[0][2] == 'Z']), len(newNextNodes))
+#         if len([c[0] for c in newNextNodes if c[0][2] == 'Z']) > 0:
+#             print(j, i, newNextNodes, len([c[0] for c in newNextNodes if c[0][2] == 'Z']), len(newNextNodes))
+#             print(f'Steps = {(j)*len(myRoute)+i+1} or maybe {totalSteps}')
+#             #print(len([c[0] for c in newNextNodes if c[0][2] == 'S']))
+#         #print(newNextNodes)
 
 # Node 1 repeats every 71 route iterations   ## 70 141 212
 # Node 2 repeats every 61 route iterations   ## 60 121 182
@@ -864,7 +861,45 @@ for j in range(1000):
 #     if n%71 == 0 and n%61 == 0 and n%66 == 0 and n%53 == 0 and n%59 == 0:
 #         print(n)
 
-#70613394919
+#70613394918
 
-print((70613394919-1)*len(myRoute)+292+1)
+print((70613394919)*len(myRoute)+292+1)
+
+#20689724711267
+
+
+for k, b in enumerate(nextNodes):
+    nextNode = b
+    soFar = []
+    lengthOfRoute = 0
+    # while lengthOfRoute < 10:
+    for j in range(200):
+        #print(f'''-----------------------''')
+        for a in myRoute:
+            lengthOfRoute += 1
+            #print([nextNode[0],int(a)],len([x for x in soFar if x == [nextNode[0],int(a),i]]))
+            #soFar += [[nextNode[0],int(a),i]]
+            #print(nextNode)  #['RTN', ['KRS', 'XNV']]
+            nextNode = nextNode[1][int(a)]
+            nextNode = [a for a in cleanNodes if a[0]==nextNode][0]
+            if nextNode[0][2] == 'Z':
+                firstZ = lengthOfRoute #j*len(myRoute)+i
+                break
+        else:
+            continue
+        break
+    
+    print(f'First Z is at {firstZ}')
+    #print(f'Second loop starts at {firstLoop}')
+
+import math
+
+print(math.lcm(20803,17873,23147,15529,17287,19631))
+
+
+
+# for i in range(1000000000):
+#     n = 79*(i+1)
+#     if n%71 == 0 and n%61 == 0 and n%66 == 0 and n%53 == 0 and n%59 == 0:
+#         print(n)
 
